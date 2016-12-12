@@ -1,0 +1,37 @@
+<h2> <%= @post.title %> </h2>
+
+<p> <%= @post.content %> </p>
+
+<h3>Comments</h3>
+<% @post.comments.where(parent_comment_id: nil).each do |comment| %>
+
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title"><%= comment.author.username %></span>
+        <p> <%= comment.content %></p>
+      </div>
+      <div class="card-action">
+        <a href="<%= comment_url(comment) %>">View Comment</a>
+        <a href="<%= new_comment_comment_url(comment) %>">Reply</a>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<a href="<%= new_post_comment_url(@post) %>" class="waves-effect waves-light btn">Add Comment</a>
+<!--
+<%#= comment.author.username %>:
+  <%#= comment.content %>
+  <%#= link_to 'View Comment', comment_url(comment) %><br>
+  <%# comment.child_comments.each do |child| %>
+    <ul>
+      <li><%#= child.author.username %>: <%#= child.content %></li>
+    </ul>
+  <%# end %>
+<%# end %>
+<br> -->
+
+<!-- <%#= link_to 'Add Comment', new_post_comment_url(@post) %> -->

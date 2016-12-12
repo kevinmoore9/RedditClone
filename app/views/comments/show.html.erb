@@ -1,0 +1,11 @@
+<%= @comment.content %>
+
+<% @comment.child_comments.each do |child| %>
+  <ul>
+    <li><%= child.author.username %>: <%= child.content %></li>
+    <%= link_to 'View Comment', comment_url(child) %><br>
+  </ul>
+<% end %>
+<a href="<%= new_comment_comment_url(@comment) %>" class="waves-effect waves-light btn">Add Comment</a>
+
+<%= link_to 'Add Comment', new_comment_comment_url(@comment) %>

@@ -1,0 +1,23 @@
+<% if params[:post_id] %>
+  <% action_url = comments_url %>
+<% else %>
+  <% action_url = comment_comments_url %>
+  <% parent = Comment.find_by_id(params[:comment_id]) %>
+<% end %>
+
+<h2>New Comment</h2>
+
+<form action="<%= action_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>" />
+
+  <input type="hidden" name="comment[post_id]" value=" <%= params[:post_id] || parent.post_id %> ">
+  <input type="hidden" name="comment[parent_comment_id]" value=" <%= parent ? parent.id : nil %> ">
+
+
+  <textarea name="comment[content]" rows="8" cols="80"></textarea><br>
+
+  <input type="submit" value="Add Comment">
+</form>

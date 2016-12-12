@@ -1,0 +1,16 @@
+<h2>Create New Subreddit</h2>
+
+<form action="<%= subs_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>" />
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="sub[title]" value="" />
+
+  <label for="description">Description</label>
+  <input id="description" type="text" name="sub[description]" value="" />
+
+  <input type="submit" value="Add Subreddit">
+</form>

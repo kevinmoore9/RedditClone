@@ -1,0 +1,29 @@
+<h2>Create New Post</h2>
+
+<form action="<%= posts_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>" />
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="post[title]" value=" <%= @post.title %> " />
+  <br><br>
+  <label>Subreddit</label>
+  <br>
+
+  <input type="hidden" name="post[sub_ids][]" value="">
+
+  <% Sub.all.each do |r| %>
+    <input
+      type="checkbox"
+      name="post[sub_ids][]"
+      value="<%= r.id %>"
+      <%= @post.subs.include?(r) ? "checked" : "" %> />
+<%= r.title %><br>
+  <% end %>
+  <br>
+  <textarea name="post[content]" rows="8" cols="80"> <%= @post.content %> </textarea>
+
+  <input type="submit" value="Add Post">
+</form>
